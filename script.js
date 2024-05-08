@@ -33,8 +33,8 @@ function checkHarmony() {
   alert(key)
   let ch0name = document.getElementById('sopranoInput').value.split('/');
   alert(ch0name)
-  //let channel0=[pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1)))for let x of ch0name]
-  //alert(channel0)
+  let channel0=[pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1)))for let x of ch0name]
+  alert(channel0)
   //let ch1name = document.getElementById('altoInput').value.split('/');
   //let ch2name = document.getElementById('tenorInput').value.split('/');
   //let ch3name = document.getElementById('bassInput').value.split('/');
@@ -51,6 +51,6 @@ function checkHarmony() {
     result.textContent = 'Errors:\n' + errors.join('\n');
   } else {
     result.style.color = 'green';
-    result.textContent = key,ch0name;
+    result.textContent = "No Errors";
   }
 }

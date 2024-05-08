@@ -12,61 +12,42 @@ function checkRange(ch, part, mini, maxi) {
   return errors;
 }
 
+function pitch_to_num(name,octave) {
+    let acd = 0; // 初始值為 0
+    if (name.includes('#')) {
+        acd = 1; // 升音
+        name=name.slice(0,-1)
+    } else if (name.includes('b')) {
+        acd = -1; // 降音
+        name=name.slice(0,-1)
+    }
+  acd+=12*octave
+  if (pitch.includes('name')) {
+    return pitch.name+acd
+  }
+}
+
 // 檢查和聲的函數
 function checkHarmony() {
   let key = document.getElementById('key').value
+  alert(key)
+  let ch0name = document.getElementById('sopranoInput').value.split('/');
+  alert(ch0name)
+  let channel0=[pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1)))for let x of ch0name]
+  alert(channel0)
+  let ch1name = document.getElementById('altoInput').value.split('/');
+  let ch2name = document.getElementById('tenorInput').value.split('/');
+  let ch3name = document.getElementById('bassInput').value.split('/');
 
-  let sopranoInput = document.getElementById('sopranoInput').value.trim();
-  let altoInput = document.getElementById('altoInput').value.trim();
-  let tenorInput = document.getElementById('tenorInput').value.trim();
-  let bassInput = document.getElementById('bassInput').value.trim();
 
-  let sopranoArray = sopranoInput.split('/');
-  let altoArray = altoInput.split('/');
-  let tenorArray = tenorInput.split('/');
-  let bassArray = bassInput.split('/');
-
-  // 將音高名稱轉換為數字並檢查範圍
-  let sopranoNumbers = sopranoArray.map(elem => {
-    let note = elem.charAt(0);
-    let octave = parseInt(elem.slice(-1));
-    let acd = 0; // 初始值為 0
-    if (elem.includes('#')) {
-        acd = 1; // 升音
-    } else if (elem.includes('b')) {
-        acd = -1; // 降音
-    }
-    return (pitch[note] || 0) + acd + (12 * octave);
-  });
-  let altoNumbers = altoArray.map(elem => {
-    let note = elem.charAt(0);
-    let octave = parseInt(elem.slice(-1));
-    let acd = 0; // 初始值為 0
-    if (elem.includes('#')) {
-        acd = 1; // 升音
-    } else if (elem.includes('b')) {
-        acd = -1; // 降音
-    }
-    return (pitch[note] || 0) + acd + (12 * octave);
-  });
-  let tenorNumbers = tenorArray.map(elem => {
-    let note = elem.charAt(0);
-    let octave = parseInt(elem.slice(-1));
-    return (pitch[note] || 0) + (12 * octave);
-  });
-  let bassNumbers = bassArray.map(elem => {
-    let note = elem.charAt(0);
-    let octave = parseInt(elem.slice(-1));
-    return (pitch[note] || 0) + (12 * octave);
-  });
 
   let errors = [];
 
   // 檢查各聲部音高是否超出範圍
-  errors = errors.concat(checkRange(sopranoNumbers, '女高音', 60, 81));
-  errors = errors.concat(checkRange(altoNumbers, '女低音', 55, 74));
-  errors = errors.concat(checkRange(tenorNumbers, '男高音', 48, 69));
-  errors = errors.concat(checkRange(bassNumbers, '男低音', 41, 62));
+  //errors = errors.concat(checkRange(channel0, '女高音', 60, 81));
+  //errors = errors.concat(checkRange(altoNumbers, '女低音', 55, 74));
+  //errors = errors.concat(checkRange(tenorNumbers, '男高音', 48, 69));
+  //errors = errors.concat(checkRange(bassNumbers, '男低音', 41, 62));
 
   // 顯示結果
   let result = document.getElementById('result');

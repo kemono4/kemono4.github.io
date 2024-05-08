@@ -15,7 +15,7 @@ function checkRange(ch, part, mini, maxi) {
 // 檢查和聲的函數
 function checkHarmony() {
   let key = document.getElementById('key').value
-  alert(key)
+
   let sopranoInput = document.getElementById('sopranoInput').value.trim();
   let altoInput = document.getElementById('altoInput').value.trim();
   let tenorInput = document.getElementById('tenorInput').value.trim();

@@ -33,23 +33,16 @@ function checkHarmony() {
   alert(key)
   let ch0name = document.getElementById('sopranoInput').value.split('/');
   alert(ch0name)
-  let channel0=[pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1)))for let x of ch0name]
-  alert(channel0)
-  let ch1name = document.getElementById('altoInput').value.split('/');
-  let ch2name = document.getElementById('tenorInput').value.split('/');
-  let ch3name = document.getElementById('bassInput').value.split('/');
+  //let channel0=[pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1)))for let x of ch0name]
+  //alert(channel0)
+  //let ch1name = document.getElementById('altoInput').value.split('/');
+  //let ch2name = document.getElementById('tenorInput').value.split('/');
+  //let ch3name = document.getElementById('bassInput').value.split('/');
 
 
 
   let errors = [];
 
-  // 檢查各聲部音高是否超出範圍
-  //errors = errors.concat(checkRange(channel0, '女高音', 60, 81));
-  //errors = errors.concat(checkRange(altoNumbers, '女低音', 55, 74));
-  //errors = errors.concat(checkRange(tenorNumbers, '男高音', 48, 69));
-  //errors = errors.concat(checkRange(bassNumbers, '男低音', 41, 62));
-
-  // 顯示結果
   let result = document.getElementById('result');
   result.innerHTML = ''; // 清空之前的結果
 
@@ -58,6 +51,6 @@ function checkHarmony() {
     result.textContent = 'Errors:\n' + errors.join('\n');
   } else {
     result.style.color = 'green';
-    result.textContent = 'No errors found. Harmony is valid!';
+    result.textContent = key,ch0name;
   }
 }

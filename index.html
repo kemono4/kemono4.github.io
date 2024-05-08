@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SATB Checker</title>
+<link rel="stylesheet" href="https://kemono4/kemono4.github.io/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>SATB Checker</h1>
+    <div class="input-container">
+      <label for="sopranoInput">Soprano:</label>
+      <input type="text" id="sopranoInput" placeholder="Enter soprano notes (C4/D4/E4...)" />
+    </div>
+    <div class="input-container">
+      <label for="altoInput">Alto:</label>
+      <input type="text" id="altoInput" placeholder="Enter alto notes (C4/D4/E4...)" />
+    </div>
+    <div class="input-container">
+      <label for="tenorInput">Tenor:</label>
+      <input type="text" id="tenorInput" placeholder="Enter tenor notes (C4/D4/E4...)" />
+    </div>
+    <div class="input-container">
+      <label for="bassInput">Bass:</label>
+      <input type="text" id="bassInput" placeholder="Enter bass notes (C4/D4/E4...)" />
+    </div>
+    <button onclick="checkHarmony()">Check Harmony</button>
+    <div id="result"></div>
+  </div>
+  <script src="https://kemono4/kemono4.github.io/script.js"></script>
+</body>
+</html>

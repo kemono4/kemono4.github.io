@@ -46,3 +46,39 @@ button:hover {
   margin-top: 20px;
   font-weight: bold;
 }
+
+.staff{
+  position: relative;
+  
+}
+.snote{
+  background-size: contain;
+  position: absolute;
+  z-index: 10;
+  top: 84px;
+  left: 200px;
+  
+}
+
+
+.anote{
+  position: absolute;
+  z-index: 10;
+  top: 103px;
+  left: 200px;
+}
+
+.tnote{
+  position: absolute;
+  z-index: 10;
+  top: 193px;
+  left: 200px;
+}
+
+.bnote{
+  position: absolute;
+  z-index: 10;
+  top: 206px;
+  left: 200px;
+}
+

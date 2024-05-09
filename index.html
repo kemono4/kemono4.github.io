@@ -16,16 +16,17 @@
 -->
   <div class="container">
     <h1>SATB Checker</h1>
-    
+    <br>
     <div class="input-container">
       <label>Key</label>
-        <select id="key">
+        <select class="input-container" id="key">
           <option value="C">C Major</option>
           <option value="c">c minor</option>
           <option value="D">D Major</option>
           <option value="d">d minor</option>
         </select>
     </div>
+    <br>
     <div class="input-container">
       <label for="sopranoInput">Soprano:</label>
       <input type="text" id="sopranoInput" placeholder="Enter soprano notes (C4/D4/E4...)" />
@@ -42,10 +43,12 @@
       <label for="bassInput">Bass:</label>
       <input type="text" id="bassInput" placeholder="Enter bass notes (C4/D4/E4...)" />
     </div>
+    <br>
     <div class="input-container">
       <label for="figuredbassInput">Figured Bass:</label>
       <input type="text" id="figuredbassInput" placeholder="Enter figured bass (64/7/5#...)" />
     </div>
+    <br>
     <button onclick="checkHarmony()">Check Harmony</button>
     <div id="result" style="text-decoration: underline;"></div>
   </div>

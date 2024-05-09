@@ -26,7 +26,7 @@ function textToHeight(text) {
    }
    if (text.length > 1) {
     var number = parseInt(text[text.length - 1]); // 获取最后一个字符作为数字
-    noteHeight -= number * 43.5; // 数字影响音符高度
+    noteHeight -= number * 43; // 数字影响音符高度
   }
   return noteHeight;
 }
@@ -141,8 +141,8 @@ function checkHarmony() {
     var offsetY
     offsetX=0
     offsetY=0
-    offsetX = 180 + i * 65; // 每个副本图片在 x 方向上的偏移量
-    offsetY = textToHeight(ch0name[i])+167; // 每个副本图片在 y 方向上的偏移量
+    offsetX = 150 + i * 54; // 每个副本图片在 x 方向上的偏移量
+    offsetY = textToHeight(ch0name[i])+165; // 每个副本图片在 y 方向上的偏移量
     copyImage.classList.add('note-copy');
     // 设置副本图片的位置和 z-index
     copyImage.style.position = 'absolute'; // 设置为绝对定位
@@ -153,6 +153,7 @@ function checkHarmony() {
     // 将副本图片添加到页面中
     document.body.appendChild(copyImage);
   };
+
 
 
 }
@@ -182,3 +183,32 @@ result.addEventListener('click', function() {
   }
 });
 
+
+let pname = document.getElementById('pname');
+let key = document.getElementById('key');
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  pname.addEventListener('change', updateKey);
+  key.addEventListener('change', updateKey);
+})
+const sharp = ['G','D','A','E','B','F#','C#']
+
+function updateKey() {
+  Array.from(document.getElementsByClassName("symbol")).forEach(symbol => {
+    symbol.hidden = true;
+  });
+  
+  let pnamev = pname.value;
+  let keyv = key.value;
+  
+
+  if (sharp.includes(pnamev)){
+    if (keyv==""){ //Major
+      for (let s=0;s<=sharp.indexOf(pnamev);s++){
+        document.getElementById(("sharp"+s.toString())).hidden = false;
+      } 
+    }
+  }
+
+}

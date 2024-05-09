@@ -18,15 +18,15 @@ function textToHeight(text) {
     case 'C': noteHeight = 146.5; break;
     case 'D': noteHeight = 140; break;
     case 'E': noteHeight = 133.5; break;
-    case 'F': noteHeight = 128; break;
-    case 'G': noteHeight = 122; break;
+    case 'F': noteHeight = 128.5; break;
+    case 'G': noteHeight = 122.5; break;
     case 'A': noteHeight = 116; break;
     case 'B': noteHeight = 110; break;
     default: noteHeight = 0; // 其他情况的默认高度为 0
    }
    if (text.length > 1) {
     var number = parseInt(text[text.length - 1]); // 获取最后一个字符作为数字
-    noteHeight -= number * 44; // 数字影响音符高度
+    noteHeight -= number * 43.5; // 数字影响音符高度
   }
   return noteHeight;
 }

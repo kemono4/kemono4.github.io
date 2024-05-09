@@ -8,18 +8,27 @@
 </head>
 <body>
   <img src="staff.png" class="staff" width="100%">
+
+  <img src="sharp.png" class="symbol" id="sharp0" height="5%">
+  <img src="sharp.png" class="symbol" id="sharp1" height="5%">
+  <img src="sharp.png" class="symbol" id="sharp2" height="5%">
+  <img src="sharp.png" class="symbol" id="sharp3" height="5%">
+  <img src="sharp.png" class="symbol" id="sharp4" height="5%">
+  <img src="sharp.png" class="symbol" id="sharp5" height="5%">
+  <img src="sharp.png" class="symbol" id="sharp6" height="5%">
   <!--
   <img src="note.png" class="snote" width="19">
   <img src="note.png" class="anote" width="19">
   <img src="note.png" class="tnote" width="19">
   <img src="note.png" class="bnote" width="19">
 -->
+  <div class="fb" id="fb">
   <div class="container">
     <h1>SATB Checker</h1>
     <br>
     <div class="input-container">
-     <label>Key</label>
-        <select class="input-container" id="name">
+      <label>Key</label>
+        <select class="input-container" id="pname">
           <option value="C">C</option>
           <option value="C#">C#</option>
           <option value="Db">Db</option>
@@ -44,7 +53,6 @@
           <option value="m">minor</option>
         </select>
     </div>
-    <br>
     <div class="input-container">
       <label for="sopranoInput">Soprano:</label>
       <input type="text" id="sopranoInput" placeholder="Enter soprano notes (C4/D4/E4...)" />
@@ -61,7 +69,6 @@
       <label for="bassInput">Bass:</label>
       <input type="text" id="bassInput" placeholder="Enter bass notes (C4/D4/E4...)" />
     </div>
-    <br>
     <div class="input-container">
       <label for="figuredbassInput">Figured Bass:</label>
       <input type="text" id="figuredbassInput" placeholder="Enter figured bass (64/7/5#...)" />

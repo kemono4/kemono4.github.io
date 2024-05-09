@@ -135,7 +135,7 @@ function checkHarmony() {
 
     // 设置副本图片的 src 为模板图片的 src，实现复制
     copyImage.src = templateImage.src;
-    copyImage.width=20;
+    copyImage.style.width="2.2%";
     // 计算副本图片的位置
     var offsetX
     var offsetY

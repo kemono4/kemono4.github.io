@@ -141,7 +141,7 @@ function checkHarmony() {
     var offsetY
     offsetX=0
     offsetY=0
-    offsetX = 140 + i * 60; // 每个副本图片在 x 方向上的偏移量
+    offsetX = 180 + i * 70; // 每个副本图片在 x 方向上的偏移量
     offsetY = textToHeight(ch0name[i])+165; // 每个副本图片在 y 方向上的偏移量
     copyImage.classList.add('note-copy');
     // 设置副本图片的位置和 z-index

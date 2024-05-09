@@ -139,7 +139,7 @@ function checkHarmony() {
       offsetY=0
       offsetX = 100 + i * 50; // 每个副本图片在 x 方向上的偏移量
       offsetY = textToHeight(ch0name[i])+165; // 每个副本图片在 y 方向上的偏移量
-      copyImage.class = 'note-copy';
+      copyImage.classList.add('note-copy');
       // 设置副本图片的位置和 z-index
       copyImage.style.position = 'absolute'; // 设置为绝对定位
       copyImage.style.top = offsetY + 'px'; // 根据偏移量设置 top

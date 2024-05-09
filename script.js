@@ -1,3 +1,38 @@
+// 清理生成的分身图片
+function clearNoteCopies() {
+  // 获取所有的分身图片
+  var noteCopies = document.querySelectorAll('.note-copy');
+
+  // 遍历并移除每个分身图片
+  noteCopies.forEach(function(noteCopy) {
+    noteCopy.parentNode.removeChild(noteCopy); // 从父元素中移除分身图片
+  });
+}
+
+// 将文字转换为高度
+function textToHeight(text) {
+  var noteHeight = 0;
+  var noteName = text[0].toUpperCase(); // 将字母转换为大写
+  // 计算音符的基准高度
+  switch (noteName) {
+    case 'C': noteHeight = 146.5; break;
+    case 'D': noteHeight = 140; break;
+    case 'E': noteHeight = 133.5; break;
+    case 'F': noteHeight = 127; break;
+    case 'G': noteHeight = 60; break;
+    case 'A': noteHeight = 50; break;
+    case 'B': noteHeight = 0; break;
+    default: noteHeight = 0; // 其他情况的默认高度为 0
+   }
+   if (text.length > 1) {
+    var number = parseInt(text[text.length - 1]); // 获取最后一个字符作为数字
+    noteHeight -= number * 43; // 数字影响音符高度
+  }
+  return noteHeight;
+}
+
+
+
 // 定義音高映射表
 const pitch = [12,14,16,17,19,21,23];
 const pindex =["C","D","E", "F", "G", "A", "B"]
@@ -36,6 +71,8 @@ function check_range(ch, chlen, part, mini, maxi) {
 
 // 檢查和聲的函數
 function checkHarmony() {
+  clearNoteCopies();
+
   let key = document.getElementById('key').value
   let ch0name = document.getElementById('sopranoInput').value.split('/');
   let ch1name = document.getElementById('altoInput').value.split('/');
@@ -79,4 +116,43 @@ function checkHarmony() {
     result.style.color = 'green';
     result.textContent = "";
   }
+
+
+  
+  // 创建一个新的 Image 对象
+  var templateImage = new Image();
+
+  // 模板图片加载完成后的处理函数
+  templateImage.onload = function() {
+    // 循环生成副本图片
+    for (var i = 0; i < chord_len; i++) {
+      // 创建新的 Image 对象
+      var copyImage = new Image();
+
+      // 设置副本图片的 src 为模板图片的 src，实现复制
+      copyImage.src = templateImage.src;
+      copyImage.width=20;
+      // 计算副本图片的位置
+      var offsetX
+      var offsetY
+      offsetX=0
+      offsetY=0
+      offsetX = 100 + i * 50; // 每个副本图片在 x 方向上的偏移量
+      offsetY = textToHeight(ch0name[i])+165; // 每个副本图片在 y 方向上的偏移量
+      copyImage.class = 'note-copy';
+      // 设置副本图片的位置和 z-index
+      copyImage.style.position = 'absolute'; // 设置为绝对定位
+      copyImage.style.top = offsetY + 'px'; // 根据偏移量设置 top
+      copyImage.style.left = offsetX + 'px'; // 根据偏移量设置 left
+      copyImage.style.zIndex = i + 1; // 根据循环次数设置不同的 z-index
+
+      // 将副本图片添加到页面中
+      document.body.appendChild(copyImage);
+    }
+  };
+
+  // 加载模板图片
+  templateImage.src = 'note.png';
 }
+
+

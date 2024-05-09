@@ -56,6 +56,29 @@ button:hover {
   background-size: contain;
 }
 
+.symbol{
+  background-size: contain;
+  position: absolute;
+  z-index: 20;
+  
+
+
+}
+
+#sharp0{top: 61px;left: 70px;}
+#sharp1{top: 80px;left: 83px;}
+#sharp2{top: 55px;left: 96px;}
+#sharp3{top: 74px;left: 109px;}
+#sharp4{top: 91px;left: 122px;}
+#sharp5{top: 67px;left: 135px;}
+#sharp6{top: 86px;left: 148px;}
+
+.fb{
+  font-size:large;
+  position: absolute;
+  top: 260px;
+  left: 107px;
+}
 
 .snote{
   background-size: contain;

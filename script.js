@@ -53,6 +53,7 @@ function pitch_to_num(name,octave) {
   }
 }
 
+///////////////////////////
 function check_range(ch, chlen, part, mini, maxi) {
   let first_error=false;
   for (let i = 0; i < chlen; i++) {
@@ -72,6 +73,7 @@ function check_range(ch, chlen, part, mini, maxi) {
 // 檢查和聲的函數
 function checkHarmony() {
   clearNoteCopies();
+  range_errors=''
 
   let key = document.getElementById('key').value
   let ch0name = document.getElementById('sopranoInput').value.split('/');
@@ -105,7 +107,7 @@ function checkHarmony() {
 }
 
 
-
+//////////////////////////////
   let result = document.getElementById('result');
   result.innerHTML = ''; // 清空之前的結果
 
@@ -119,40 +121,64 @@ function checkHarmony() {
 
 
   
+//////////////////////////////////////////////////////
+  
   // 创建一个新的 Image 对象
   var templateImage = new Image();
-
+  templateImage.src = 'note.png';
   // 模板图片加载完成后的处理函数
-  templateImage.onload = function() {
-    // 循环生成副本图片
-    for (var i = 0; i < chord_len; i++) {
-      // 创建新的 Image 对象
-      var copyImage = new Image();
 
-      // 设置副本图片的 src 为模板图片的 src，实现复制
-      copyImage.src = templateImage.src;
-      copyImage.width=20;
-      // 计算副本图片的位置
-      var offsetX
-      var offsetY
-      offsetX=0
-      offsetY=0
-      offsetX = 100 + i * 50; // 每个副本图片在 x 方向上的偏移量
-      offsetY = textToHeight(ch0name[i])+165; // 每个副本图片在 y 方向上的偏移量
-      copyImage.classList.add('note-copy');
-      // 设置副本图片的位置和 z-index
-      copyImage.style.position = 'absolute'; // 设置为绝对定位
-      copyImage.style.top = offsetY + 'px'; // 根据偏移量设置 top
-      copyImage.style.left = offsetX + 'px'; // 根据偏移量设置 left
-      copyImage.style.zIndex = i + 1; // 根据循环次数设置不同的 z-index
+  // 循环生成副本图片
+  for (var i = 0; i < chord_len; i++) {
+    // 创建新的 Image 对象
+    let copyImage = new Image();
 
-      // 将副本图片添加到页面中
-      document.body.appendChild(copyImage);
-    }
+    // 设置副本图片的 src 为模板图片的 src，实现复制
+    copyImage.src = templateImage.src;
+    copyImage.width=20;
+    // 计算副本图片的位置
+    var offsetX
+    var offsetY
+    offsetX=0
+    offsetY=0
+    offsetX = 100 + i * 50; // 每个副本图片在 x 方向上的偏移量
+    offsetY = textToHeight(ch0name[i])+165; // 每个副本图片在 y 方向上的偏移量
+    copyImage.classList.add('note-copy');
+    // 设置副本图片的位置和 z-index
+    copyImage.style.position = 'absolute'; // 设置为绝对定位
+    copyImage.style.top = offsetY + 'px'; // 根据偏移量设置 top
+    copyImage.style.left = offsetX + 'px'; // 根据偏移量设置 left
+    copyImage.style.zIndex = i + 1; // 根据循环次数设置不同的 z-index
+    copyImage.id = 'copyImage_' + i; 
+    // 将副本图片添加到页面中
+    document.body.appendChild(copyImage);
   };
 
-  // 加载模板图片
-  templateImage.src = 'note.png';
+
 }
 
+
+result.addEventListener('click', function() {
+  if (result.style.color === 'blue') {
+    result.style.color = 'red'; 
+    var errorParts = range_errors.slice(5,-5).split(',');
+
+    for (let i = 0; i < errorParts.length; i++) {
+      let copyImage = document.getElementById('copyImage_' + (errorParts[i] - 1).toString());
+      copyImage.src = 'note.png'; 
+    };
+  }else { // 否则当前状态为红色
+
+    result.style.color = 'blue'; 
+    //setTimeout(10)
+
+  // 根据 range_errors 中的信息，标记对应的分身图片
+    var errorParts = range_errors.slice(5,-5).split(',');
+  
+    for (let i = 0; i < errorParts.length; i++) {
+      let copyImage = document.getElementById('copyImage_' + (errorParts[i] - 1).toString());
+      copyImage.src = 'staff.jpg'; 
+    };
+  }
+});
 

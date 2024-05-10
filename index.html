@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <img src="staff.png" class="staff" width="100%">
+  <img src="staff.png" class="staff" width="1094px">
 
   <img src="sharp.png" class="symbol" id="sharp0" height="47px">
   <img src="sharp.png" class="symbol" id="sharp1" height="47px">
@@ -16,16 +16,36 @@
   <img src="sharp.png" class="symbol" id="sharp4" height="47px">
   <img src="sharp.png" class="symbol" id="sharp5" height="47px">
   <img src="sharp.png" class="symbol" id="sharp6" height="47px">
-  <!--
-  <img src="note.png" class="snote" width="19">
-  <img src="note.png" class="anote" width="19">
-  <img src="note.png" class="tnote" width="19">
-  <img src="note.png" class="bnote" width="19">
--->
+  <img src="sharp.png" class="symbol" id="bsharp0" height="47px">
+  <img src="sharp.png" class="symbol" id="bsharp1" height="47px">
+  <img src="sharp.png" class="symbol" id="bsharp2" height="47px">
+  <img src="sharp.png" class="symbol" id="bsharp3" height="47px">
+  <img src="sharp.png" class="symbol" id="bsharp4" height="47px">
+  <img src="sharp.png" class="symbol" id="bsharp5" height="47px">
+  <img src="sharp.png" class="symbol" id="bsharp6" height="47px">
+
+  <img src="flat.png" class="symbol" id="flat0" height="30px">
+  <img src="flat.png" class="symbol" id="flat1" height="30px">
+  <img src="flat.png" class="symbol" id="flat2" height="30px">
+  <img src="flat.png" class="symbol" id="flat3" height="30px">
+  <img src="flat.png" class="symbol" id="flat4" height="30px">
+  <img src="flat.png" class="symbol" id="flat5" height="30px">
+  <img src="flat.png" class="symbol" id="flat6" height="30px">
+  <img src="flat.png" class="symbol" id="bflat0" height="30px">
+  <img src="flat.png" class="symbol" id="bflat1" height="30px">
+  <img src="flat.png" class="symbol" id="bflat2" height="30px">
+  <img src="flat.png" class="symbol" id="bflat3" height="30px">
+  <img src="flat.png" class="symbol" id="bflat4" height="30px">
+  <img src="flat.png" class="symbol" id="bflat5" height="30px">
+  <img src="flat.png" class="symbol" id="bflat6" height="30px">
+
+  <div class="square"></div>
+
   <div class="fb" id="fb">
-  <div class="container">
+  <br>
+  <br>
+  <div class="container" id="container">
     <h1>SATB Checker</h1>
-    <br>
     <div class="input-container">
       <label>Key</label>
         <select class="input-container" id="pname">
@@ -74,8 +94,7 @@
       <input type="text" id="figuredbassInput" placeholder="Enter figured bass (64/7/5#...)" />
     </div>
     <br>
-    <button onclick="checkHarmony()">Check Harmony</button>
-    <div id="result" style="text-decoration: underline;"></div>
+    <button id="check" onclick="checkHarmony()">Check Harmony</button>
   </div>
   <script src="script.js"></script>
 </body>

@@ -5,8 +5,8 @@ body {
 }
 
 .container {
-  max-width: 800px;
-  margin: 10px auto;
+  max-width: 900px;
+  margin: 50px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -14,25 +14,25 @@ body {
 }
 
 .input-container {
-  font-size:xx-large;
+  font-size:large;
   margin-bottom: 10px;
 }
 
 label {
   display: inline-block;
-  width: 200px;
+  width: 120px;
 }
 
 input[type="text"] {
-  font-size:x-large;
-  width: 500px;
-  padding: 12px;
+  font-size:large;
+  width: 600px;
+  padding: 9px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
 button {
-  font-size:x-large;
+  font-size:large;
   padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
@@ -45,10 +45,21 @@ button:hover {
   background-color: #45a049;
 }
 
-#result {
-  font-size:x-large;
+.square {
+  width: 32px; /* 宽度 */
+  height: 1.4px; /* 高度 */
+  background-color: black; /* 背景颜色 */
+  position: absolute;
+  z-index: 10;
+  top: 146px;
+  left: 205.5px;
+}
+
+.result {
+  font-size:large;
   margin-top: 20px;
   font-weight: bold;
+  text-decoration: underline;
 }
 
 .staff{
@@ -60,9 +71,6 @@ button:hover {
   background-size: contain;
   position: absolute;
   z-index: 20;
-  
-
-
 }
 
 #sharp0{top: 61px;left: 70px;}
@@ -72,6 +80,28 @@ button:hover {
 #sharp4{top: 91px;left: 122px;}
 #sharp5{top: 67px;left: 135px;}
 #sharp6{top: 86px;left: 148px;}
+#bsharp0{top: 184px;left: 71px;}
+#bsharp1{top: 203px;left: 84px;}
+#bsharp2{top: 178px;left: 97px;}
+#bsharp3{top: 197px;left: 110px;}
+#bsharp4{top: 214px;left: 123px;}
+#bsharp5{top: 190px;left: 136px;}
+#bsharp6{top: 209px;left: 149px;}
+
+#flat0{top: 88px;left: 86px;}
+#flat1{top: 69px;left: 99px;}
+#flat2{top: 95px;left: 112px;}
+#flat3{top: 75px;left: 125px;}
+#flat4{top: 101px;left: 138px;}
+#flat5{top: 82px;left: 151px;}
+#flat6{top: 108px;left: 164px;}
+#bflat0{top: 211px;left: 86px;}
+#bflat1{top: 192px;left: 99px;}
+#bflat2{top: 218px;left: 112px;}
+#bflat3{top: 198px;left: 125px;}
+#bflat4{top: 224px;left: 138px;}
+#bflat5{top: 205px;left: 151px;}
+#bflat6{top: 231px;left: 164px;}
 
 .fb{
   font-size:large;

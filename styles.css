@@ -45,14 +45,12 @@ button:hover {
   background-color: #45a049;
 }
 
-.square {
+.ledger {
   width: 32px; /* 宽度 */
-  height: 1.4px; /* 高度 */
+  height: 1px; /* 高度 */
   background-color: black; /* 背景颜色 */
   position: absolute;
   z-index: 10;
-  top: 146px;
-  left: 205.5px;
 }
 
 .result {
@@ -73,20 +71,20 @@ button:hover {
   z-index: 20;
 }
 
-#sharp0{top: 61px;left: 70px;}
-#sharp1{top: 80px;left: 83px;}
-#sharp2{top: 55px;left: 96px;}
-#sharp3{top: 74px;left: 109px;}
-#sharp4{top: 91px;left: 122px;}
-#sharp5{top: 67px;left: 135px;}
-#sharp6{top: 86px;left: 148px;}
-#bsharp0{top: 184px;left: 71px;}
-#bsharp1{top: 203px;left: 84px;}
-#bsharp2{top: 178px;left: 97px;}
-#bsharp3{top: 197px;left: 110px;}
-#bsharp4{top: 214px;left: 123px;}
-#bsharp5{top: 190px;left: 136px;}
-#bsharp6{top: 209px;left: 149px;}
+#sharp0{top: 58px;left: 83px;}
+#sharp1{top: 77px;left: 96px;}
+#sharp2{top: 52px;left: 109px;}
+#sharp3{top: 70px;left: 122px;}
+#sharp4{top: 88px;left: 135px;}
+#sharp5{top: 65px;left: 148px;}
+#sharp6{top: 83px;left: 161px;}
+#bsharp0{top: 214px;left: 84px;}
+#bsharp1{top: 233px;left: 97px;}
+#bsharp2{top: 208px;left: 110px;}
+#bsharp3{top: 226px;left: 123px;}
+#bsharp4{top: 244px;left: 136px;}
+#bsharp5{top: 220px;left: 149px;}
+#bsharp6{top: 238px;left: 162px;}
 
 #flat0{top: 88px;left: 86px;}
 #flat1{top: 69px;left: 99px;}

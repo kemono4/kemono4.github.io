@@ -62,7 +62,14 @@ function textToHeight(text) {
   return noteHeight;
 }
 
-
+function print_error(text,value,part){
+  let errors = document.createElement("div");
+  errors.classList.add("result")
+  errors.innerHTML = text;
+  errors.value = value;
+  errors.style.color = 'red'; 
+  document.getElementById('container').appendChild(errors);
+}
 
 // 定義音高映射表
 const pitch = [12,14,16,17,19,21,23];
@@ -102,129 +109,124 @@ function check_range(ch, chlen, part, mini, maxi) {
   return first_error;
 }
 
+function generate_notes(chn,part){
+    let offsetX
+    let offsetY
+    // 循环生成副本图片
+    for (let i = 0; i < chord_len; i++) {
+      // 创建新的 Image 对象
+      let copyImage = new Image();
+  
+      // 设置副本图片的 src 为模板图片的 src，实现复制
+      copyImage.src = 'note.png';
+      copyImage.style.width="22.8px";
+      // 计算副本图片的位置
+      
+      offsetX = 210 + i*18*46.5/chord_len; // 每个副本图片在 x 方向上的偏移量
+      offsetY = textToHeight(chn[i]); // 每个副本图片在 y 方向上的偏移量
+      copyImage.classList.add('note-copy');
+      // 设置副本图片的位置和 z-index
+      copyImage.style.position = 'absolute'; // 设置为绝对定位
+      copyImage.style.top = offsetY + 'px'; // 根据偏移量设置 top
+      copyImage.style.left = offsetX + 'px'; // 根据偏移量设置 left
+      copyImage.style.zIndex = 9; // 根据循环次数设置不同的 z-index
+      copyImage.id = ('copyImage_' + (i+part*chord_len).toString());
+      // 将副本图片添加到页面中
+      document.body.appendChild(copyImage);
+  
+      if (chn[i].slice(-1)<4 || (chn[i].slice(-1)==4 && chn[i][0]=='C')){
+        for (let n=0;n<dledgerline(chn[i]);n++){
+          let ledger = document.createElement("div");
+          ledger.classList.add("note-copy","ledger")
+          ledger.style.top = 141+n*12.2+'px';
+          ledger.style.left = offsetX-4.8 + 'px';
+          document.body.appendChild(ledger);
+        }
+      }
+      else if (chn[i].slice(-1)>5 || (chn[i].slice(-1)==5 && ['A','B'].includes(chn[i][0]))){
+        for (let n=0;n<uledgerline(chn[i]);n++){
+          let ledger = document.createElement("div");
+          ledger.classList.add("note-copy","ledger")
+          ledger.style.top = 68-n*12.2+'px';
+          ledger.style.left = offsetX-4.8 + 'px';
+          document.body.appendChild(ledger);
+        }
+        
+      }
+      
+  
+    }
+}
+
+
+var keysig='C'
 // 檢查和聲的函數
 function checkHarmony() {
   clearResults()
   clearNoteCopies();
   range_errors=''
 
-  let key = document.getElementById('key').value
-  let ch0name = document.getElementById('sopranoInput').value.split('/');
-  let ch1name = document.getElementById('altoInput').value.split('/');
-  let ch2name = document.getElementById('tenorInput').value.split('/');
-  let ch3name = document.getElementById('bassInput').value.split('/');
+  var ch0name = document.getElementById('sopranoInput').value.split('/');
+  var ch1name = document.getElementById('altoInput').value.split('/');
+  var ch2name = document.getElementById('tenorInput').value.split('/');
+  var ch3name = document.getElementById('bassInput').value.split('/');
 
-  let channel0=[]
-  let channel1=[]
-  let channel2=[]
-  let channel3=[]
+  var channel0=[]
+  var channel1=[]
+  var channel2=[]
+  var channel3=[]
  
-  for (let x of ch0name){
-    channel0.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))
-  }
-  for (let x of ch1name){
-    channel1.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))
-  }
-  for (let x of ch2name){
-    channel2.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))
-  }
-  for (let x of ch3name){
-    channel3.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))
-  }
+  for (let x of ch0name){channel0.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))}
+  for (let x of ch1name){channel1.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))}
+  for (let x of ch2name){channel2.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))}
+  for (let x of ch3name){channel3.push(pitch_to_num(x.slice(0,-1),parseInt(x.slice(-1))))}
   alert(channel0+channel1+channel2+channel3)
 
   chord_len=ch0name.length
 
   if (check_range(channel0,chord_len,'一',60,81)){
     range_errors+="音超過音域"
-    var errors = document.createElement("div");
-    errors.classList.add("result")
-    errors.innerHTML = range_errors;
-    errors.value = range_errors.slice(5,-5);
-    errors.style.color = 'red'; 
-    document.getElementById('container').appendChild(errors);
+    print_error(range_errors,range_errors.slice(5,-5).split(',').map(num => parseInt(num)))
   }
   if (check_range(channel1,chord_len,'二',55,74)){
+    // 定義原始的數字陣列
+
     range_errors+="音超過音域"
+  
+    print_error(range_errors,range_errors.slice(5,-5).split(',').map(num => parseInt(num) + chord_len))
+    //
   }
 
   
 //////////////////////////////////////////////////////
-  
-  // 创建一个新的 Image 对象
-  var templateImage = new Image();
-  templateImage.src = 'note.png';
-  // 模板图片加载完成后的处理函数
-
-  // 循环生成副本图片
-  for (var i = 0; i < chord_len; i++) {
-    // 创建新的 Image 对象
-    let copyImage = new Image();
-
-    // 设置副本图片的 src 为模板图片的 src，实现复制
-    copyImage.src = templateImage.src;
-    copyImage.style.width="22.8px";
-    // 计算副本图片的位置
-    var offsetX
-    var offsetY
-    offsetX=0
-    offsetY=0
-    offsetX = 210 + i*18*46.5/chord_len; // 每个副本图片在 x 方向上的偏移量
-    offsetY = textToHeight(ch0name[i]); // 每个副本图片在 y 方向上的偏移量
-    copyImage.classList.add('note-copy');
-    // 设置副本图片的位置和 z-index
-    copyImage.style.position = 'absolute'; // 设置为绝对定位
-    copyImage.style.top = offsetY + 'px'; // 根据偏移量设置 top
-    copyImage.style.left = offsetX + 'px'; // 根据偏移量设置 left
-    copyImage.style.zIndex = 9; // 根据循环次数设置不同的 z-index
-    copyImage.id = ('copyImage_' + i.toString()); 
-    // 将副本图片添加到页面中
-    document.body.appendChild(copyImage);
-
-    if (ch0name[i].slice(-1)<4 || (ch0name[i].slice(-1)==4 && ch0name[i][0]=='C')){
-      for (let n=0;n<dledgerline(ch0name[i]);n++){
-        var ledger = document.createElement("div");
-        ledger.classList.add("note-copy","ledger")
-        ledger.style.top = 141+n*12.2+'px';
-        ledger.style.left = offsetX-4.8 + 'px';
-        document.body.appendChild(ledger);
-      }
-    }
-    else if (ch0name[i].slice(-1)>5 || (ch0name[i].slice(-1)==5 && ['A','B'].includes(ch0name[i][0]))){
-      for (let n=0;n<uledgerline(ch0name[i]);n++){
-        var ledger = document.createElement("div");
-        ledger.classList.add("note-copy","ledger")
-        ledger.style.top = 68-n*12.2+'px';
-        ledger.style.left = offsetX-4.8 + 'px';
-        document.body.appendChild(ledger);
-      }
-      
-    }
-    
-
-  }
+generate_notes(ch0name,0)
+generate_notes(ch1name,1)
 
 }
 
 
 document.addEventListener('click', function(event) {
+  
   let result = event.target;
   if (result.classList.contains('result')) {
     if (result.style.color === 'blue') {
       result.style.color = 'red'; 
-      var errorParts = result.value.split(',');
+      
+      let errorParts = result.value;
+      
+      
   
       for (let i = 0; i < errorParts.length; i++) {
         let copyImage = document.getElementById(('copyImage_' + (errorParts[i] - 1).toString()));
+        
         copyImage.src = 'note.png'; 
       };
     }else { // 否则当前状态为红色
-  
       result.style.color = 'blue'; 
       //setTimeout(10)
   
     // 根据 range_errors 中的信息，标记对应的分身图片
-      var errorParts = result.value.split(',');
+      let errorParts = result.value;
     
       for (let i = 0; i < errorParts.length; i++) {
         let copyImage = document.getElementById(('copyImage_' + (errorParts[i] - 1).toString()));
@@ -245,15 +247,15 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 const sharp = ['G','D','A','E','B','F#','C#']
 const flat =['F','Bb','Eb','Ab','Db','Gb','Cb']
-const sharpm = ['E','B','F#','C#','G#','D#','A#']
-const flatm =['D','G','C','F','Bb','Eb','Ab']
+const sharpm = ['Em','Bm','F#m','C#m','G#m','D#m','A#m']
+const flatm =['Dm','Gm','Cm','Fm','Bbm','Ebm','Abm']
 
 function updateKey() {
   clearSymbol()
   
   let pnamev = pname.value;
   let keyv = key.value;
-  
+  keysig=pnamev+keyv
 
   if (keyv==""){
     if (sharp.includes(pnamev)){ //Major
@@ -269,14 +271,14 @@ function updateKey() {
       } 
     }
   }else{
-    if (sharpm.includes(pnamev)){
-      for (let s=0;s<=sharpm.indexOf(pnamev);s++){
+    if (sharpm.includes(pnamev+keyv)){
+      for (let s=0;s<=sharpm.indexOf(pnamev+keyv);s++){
         document.getElementById(("sharp"+s.toString())).hidden = false;
         document.getElementById(("bsharp"+s.toString())).hidden = false;
       } 
     }
-    if (flatm.includes(pnamev)){
-      for (let s=0;s<=flatm.indexOf(pnamev);s++){
+    if (flatm.includes(pnamev+keyv)){
+      for (let s=0;s<=flatm.indexOf(pnamev+keyv);s++){
         document.getElementById(("flat"+s.toString())).hidden = false;
         document.getElementById(("bflat"+s.toString())).hidden = false;
       } 

@@ -28,7 +28,7 @@
         theSheep.runCode(`
           SndBuf my_player => dac;
           "./sheep.wav" => my_player.read;
-          .9 => m_player.read;
+          .9 => my_player.gain;
           1::second => now;
         `);
       });

@@ -8,6 +8,9 @@
 
       document.getElementById('action').addEventListener('click', async () => {
         // Initialize default ChucK object
+        if (theChuck === undefined) {
+          theChuck = await Chuck.init([]);
+        }
         // Run ChucK code
         theChuck.runCode(`
           SinOsc sin => dac;
@@ -27,7 +30,7 @@
     </script>
   </head>
   <body>
-    <button id="action">TEST</button>
+    <button id="action">TESTt</button>
     <button id="sheep">animal 1</button>
   </body>
 </html>

@@ -13,7 +13,7 @@
         // Run ChucK code
         theChuck.runCode(`
           SinOsc sin => dac;
-          440 => sin.freq;
+          random2(220,880) => sin.freq;
           1::second => now;
         `);
       });

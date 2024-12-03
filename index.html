@@ -22,8 +22,9 @@
         // Initialize default ChucK object
         // Run ChucK code
         theChuck.runCode(`
-          SinOsc sin => dac;
-          220 => sin.freq;
+          SndBuf my_player => dac;
+          "./sheep.wav" => string a_music;
+          a_music => my_player.read;
           1::second => now;
         `);
       });

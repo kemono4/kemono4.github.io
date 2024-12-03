@@ -4,7 +4,7 @@
     <script type="module" defer>
       import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
 
-      let theChuck; // global variable
+      let theChuck, theSheep; // global variable
 
       document.getElementById('action').addEventListener('click', async () => {
         // Initialize default ChucK object
@@ -20,14 +20,13 @@
       });
       document.getElementById('sheep').addEventListener('click', async () => {
         // Initialize default ChucK object
-        if (theChuck === undefined) {
-          theChuck = await Chuck.init([]);
+        if (theSheep === undefined) {
+          theSheep = await Chuck.init([{serverFilename: "./sheep.wav", virtualFilename: "sheep.wav"}]);
         }
         // Run ChucK code
-        theChuck.runCode(`
+        theSheep.runCode(`
           SndBuf my_player => dac;
-          me.dir() + "sheep.wav" => string a_music;
-          a_music => my_player.read;
+          "./sheep.wav" => my_player.read;
           1::second => now;
         `);
       });

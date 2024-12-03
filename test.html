@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script type="module" defer>
+      import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
+
+      let theChuck; // global variable
+
+      document.getElementById('action').addEventListener('click', async () => {
+        // Initialize default ChucK object
+        if (theChuck === undefined) {
+          theChuck = await Chuck.init([]);
+        }
+        // Run ChucK code
+        theChuck.runCode(`
+          SinOsc sin => dac;
+          440 => sin.freq;
+          1::second => now;
+        `);
+      });
+    </script>
+  </head>
+  <body>
+    <button id="action">Start and Play</button>
+  </body>
+</html>

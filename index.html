@@ -15,6 +15,7 @@
         theChuck.runCode(`
           SinOsc sin => dac;
           440 => sin.freq;
+          .5 => sin.gain;
           1::second => now;
         `);
       });

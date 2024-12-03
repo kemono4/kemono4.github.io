@@ -20,6 +20,8 @@
       });
       document.getElementById('sheep').addEventListener('click', async () => {
         // Initialize default ChucK object
+        if (theChuck === undefined) {
+          theChuck = await Chuck.init([]);
         // Run ChucK code
         theChuck.runCode(`
           SndBuf my_player => dac;

@@ -8,9 +8,6 @@
 
       document.getElementById('action').addEventListener('click', async () => {
         // Initialize default ChucK object
-        if (theChuck === undefined) {
-          theChuck = await Chuck.init([]);
-        }
         // Run ChucK code
         theChuck.runCode(`
           SinOsc sin => dac;
@@ -18,9 +15,19 @@
           1::second => now;
         `);
       });
+      document.getElementById('sheep').addEventListener('click', async () => {
+        // Initialize default ChucK object
+        // Run ChucK code
+        theChuck.runCode(`
+          SinOsc sin => dac;
+          220 => sin.freq;
+          1::second => now;
+        `);
+      });
     </script>
   </head>
   <body>
-    <button id="action">Start and Play</button>
+    <button id="action">TEST</button>
+    <button id="sheep">animal 1</button>
   </body>
 </html>

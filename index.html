@@ -1,22 +1,24 @@
 <html>
   <head>
+    <h1>Hello WebChucK - from file</h1>
     <script type="module" defer>
       import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
 
       let theChuck; // global variable
 
-      document.getElementById('action').addEventListener('click', async () => {
-        // Initialize default ChucK object
-        if (theChuck === undefined) {
-          theChuck = await Chuck.init([]);
+    var serverFilesToPreload = [
+        {
+            serverFilename: './my-file.ck',
+            virtualFilename: 'my-file.ck'
         }
-        // Run ChucK code
-        theChuck.runCode(`
-          SinOsc sin => dac;
-          Math.random2(220,880) => sin.freq;
-          1::second => now;
-        `);
-      });
+    ];
+    var startButton = document.getElementById( "startButton" );
+    startButton.addEventListener( "click", async function() {
+        await preloadFilenames( serverFilesToPreload );
+        await startChuck();
+        await theChuckReady;
+        await theChuck.runFile("my-file.ck");
+    });
     </script>
   </head>
   <body>

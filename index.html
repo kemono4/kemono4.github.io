@@ -39,7 +39,7 @@
             <!-- Example buttons -->
             <button class="sound-button" data-id="sound1" data-code="
                 SinOsc sin => dac;
-                440 => sin.freq;
+                Math.random2(220,880) => sin.freq;
                 .2 => sin.gain;
                 1::second => now;
             ">

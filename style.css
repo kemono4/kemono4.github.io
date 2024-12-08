@@ -39,11 +39,12 @@ p {
 }
 
 button {
+  	font-size: 1.2rem;
     background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;

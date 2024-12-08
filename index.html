@@ -61,7 +61,14 @@
             ' data-resources='[{"serverFilename": "./cow.wav", "virtualFilename": "cow.wav"}]'>
                 動物叫聲
             </button>
-            <button></button>
+            <button class="sound-button" data-id="horse" data-code='
+                SndBuf my_player => dac;
+                "./horse.wav" => my_player.read;
+                .9 => my_player.gain;
+                2::second => now;
+            ' data-resources='[{"serverFilename": "./horse.wav", "virtualFilename": "horse.wav"}]'>
+                動物叫聲
+            </button>
         </div>
     </div>
 </body>

@@ -1,41 +1,60 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <h1>Hello WebChucK - from ck</h1>
+<head>
+    <title>猜動物叫聲或音樂</title>
     <script type="module" defer>
-      import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
+        import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
 
-      let theChuck, theSheep; // global variable
+        let chuckInstances = {};
 
-      document.getElementById('action').addEventListener('click', async () => {
-        // Initialize default ChucK object
-        if (theChuck === undefined) {
-          theChuck = await Chuck.init([]);
+        async function playSound(id, code, resources = []) {
+            if (!chuckInstances[id]) {
+                chuckInstances[id] = await Chuck.init(resources.map(res => ({
+                    serverFilename: res.serverFilename,
+                    virtualFilename: res.virtualFilename
+                })));
+            }
+            chuckInstances[id].runCode(code);
         }
-        // Run ChucK code
-        theChuck.runCode(`
-          SinOsc sin => dac;
-          440 => sin.freq;
-          .2 => sin.gain;
-          1::second => now;
-        `);
-      });
-      document.getElementById('sheep').addEventListener('click', async () => {
-        // Initialize default ChucK object
-        if (theSheep === undefined) {
-          theSheep = await Chuck.init([{serverFilename: "./sheep.wav", virtualFilename: "sheep.wav"}]);
-        }
-        // Run ChucK code
-        theSheep.runCode(`
-          SndBuf my_player => dac;
-          "./sheep.wav" => my_player.read;
-          .9 => my_player.gain;
-          1::second => now;
-        `);
-      });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Example button sounds
+            document.querySelectorAll('.sound-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const code = button.getAttribute('data-code');
+                    const resources = JSON.parse(button.getAttribute('data-resources') || '[]');
+                    playSound(id, code, resources);
+                });
+            });
+        });
     </script>
-  </head>
-  <body>
-    <button id="action">TESTt</button>
-    <button id="sheep">animal 1</button>
-  </body>
+    <style>
+        /* Include your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>猜動物叫聲或音樂</h1>
+        <div class="grid">
+            <!-- Example buttons -->
+            <button class="sound-button" data-id="sound1" data-code="
+                SinOsc sin => dac;
+                440 => sin.freq;
+                .2 => sin.gain;
+                1::second => now;
+            ">
+                音效 1
+            </button>
+            <button class="sound-button" data-id="sheep" data-code="
+                SndBuf my_player => dac;
+                \"sheep.wav\" => my_player.read;
+                .9 => my_player.gain;
+                1::second => now;
+            " data-resources='[{"serverFilename": "./sheep.wav", "virtualFilename": "sheep.wav"}]'>
+                動物叫聲
+            </button>
+        </div>
+    </div>
+</body>
 </html>
